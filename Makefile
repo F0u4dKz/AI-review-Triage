@@ -1,4 +1,4 @@
-.PHONY: mock-transactions mock-reviews mock-reviews-dry api worker worker-once load
+.PHONY: mock-transactions mock-reviews mock-reviews-dry api worker worker-once load dbt dashboard
 
 mock-transactions:
 	uv run python -m generators.transactions
@@ -20,3 +20,9 @@ worker-once:
 
 load:
 	uv run python -m loader
+
+dbt:
+	uv run python -m publisher
+
+dashboard:
+	uv run streamlit run dashboard/app.py

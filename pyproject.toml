@@ -3,6 +3,7 @@ name = "duckdb-llm"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "dbt-duckdb>=1.11.1",
     "dlt[duckdb]>=1.31.0",
     "duckdb>=2.0.0",
     "faker>=40.44.0",
@@ -11,6 +12,7 @@ dependencies = [
     "pandas>=3.1.1",
     "pyarrow>=26.0.1",
     "pydantic-settings>=2.16.2",
+    "streamlit>=1.67.0",
     "uvicorn>=0.54.0",
 ]
 

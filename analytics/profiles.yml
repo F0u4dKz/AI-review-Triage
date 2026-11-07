@@ -1,0 +1,14 @@
+review_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: analytics_next.duckdb
+      schema: main
+      threads: 1
+      config_options:
+        storage_compatibility_version: v1.5.5
+      attach:
+        - path: raw.duckdb
+          alias: raw
+          read_only: true

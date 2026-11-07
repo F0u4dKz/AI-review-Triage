@@ -1,0 +1,119 @@
+version: 2
+
+models:
+  - name: dim_category
+    columns:
+      - name: id_category
+        tests: [not_null, unique]
+  - name: dim_product
+    columns:
+      - name: id_product
+        tests: [not_null, unique]
+      - name: id_category
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_category')
+                field: id_category
+  - name: dim_client
+    columns:
+      - name: id_client
+        tests: [not_null, unique]
+  - name: dim_payment
+    columns:
+      - name: id_payment
+        tests: [not_null, unique]
+      - name: id_order
+        tests: [not_null]
+  - name: fact_order
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - id_order
+              - id_product
+    columns:
+      - name: id_order
+        tests: [not_null]
+      - name: id_product
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: id_product
+      - name: id_client
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_client')
+                field: id_client
+      - name: id_payment
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payment')
+                field: id_payment
+      - name: id_category
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_category')
+                field: id_category
+      - name: line_amount
+        tests: [not_null]
+      - name: id_review
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_review')
+                field: id_review
+  - name: fact_delivery
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - id_order
+              - id_product
+    columns:
+      - name: id_order
+        tests: [not_null]
+      - name: id_product
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: id_product
+      - name: id_client
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_client')
+                field: id_client
+      - name: id_category
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_category')
+                field: id_category
+      - name: id_review
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_review')
+                field: id_review
+  - name: dim_review
+    columns:
+      - name: id_review
+        tests: [not_null, unique]
+  - name: kpi_overview
+  - name: monthly_sales
+  - name: satisfaction_by_category
+  - name: satisfaction_by_product

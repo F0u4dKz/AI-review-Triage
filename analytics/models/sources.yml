@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Bronze tables in raw.duckdb. Attached read-only.
+    database: raw
+    schema: main
+    tables:
+      - name: category
+      - name: product
+      - name: clients
+      - name: payments
+      - name: order_head
+      - name: order_items
+      - name: deliveries
+      - name: reviews_enrichment

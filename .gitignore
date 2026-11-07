@@ -10,3 +10,9 @@ landing/
 data/
 *.duckdb
 *.duckdb.wal
+
+analytics/target/
+analytics/dbt_packages/
+analytics/logs/
+analytics/.user.yml
+logs/

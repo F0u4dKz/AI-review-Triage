@@ -1,0 +1,19 @@
+name: review_analytics
+version: 1.0.0
+config-version: 2
+profile: review_analytics
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  review_analytics:
+    silver:
+      +materialized: table
+      +schema: silver
+    gold:
+      +materialized: view
+      +schema: gold
